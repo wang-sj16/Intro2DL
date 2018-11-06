@@ -22,7 +22,6 @@ class FCLayer():
 
 		self.diff_W = np.zeros((num_input, num_output))
 		self.diff_b = np.zeros((1, num_output))
-		#self.input = np.zeros((100,num_input))
 
 	def forward(self, Input):
 		self.input = Input

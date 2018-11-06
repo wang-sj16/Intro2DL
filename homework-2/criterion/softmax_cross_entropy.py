@@ -24,23 +24,8 @@ class SoftmaxCrossEntropyLossLayer():
 		# Calculate the average accuracy and loss over the minibatch, and
 		# store in self.accu and self.loss respectively.
 		# Only return the self.loss, self.accu will be used in solver.py.
-		#self.loss = np.zeros(1, dtype='f')
 		self.log = logit
 		self.g = gt
-		#denominator = [0.0 for i in range(batch_size)]
-		#for i in range(batch_size):
-		#	for j in range(10):
-		#		denominator[i] += np.exp(logit[i][j]-max(logit[i]))
-		#		
-		#for i in range(batch_size):
-		#	for j in range(10):
-		#		self.log[i][j] = (np.exp(logit[i][j]-max(logit[i]))) / denominator[i]
-		#		self.loss += math.log(max(self.log[i][j] , EPS)) * gt[i][j]
-		#	self.acc += (np.argmax(logit[i])==np.argmax(gt[i]))
-		#	
-		#	
-		#self.loss = -self.loss / (batch_size * 10)
-		#self.acc = self.acc / (batch_size)
 		logit=np.exp(logit)
 		for i in range(logit.shape[0]):
 				logit[i]=logit[i]/np.sum(logit[i])

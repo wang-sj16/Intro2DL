@@ -18,14 +18,9 @@ class SigmoidLayer():
 	    ############################################################################
 
 	def backward(self, delta):
-		#for i in range(len(delta)):
-		#	for j in range(len(delta[i])):
-		#		ne = np.exp(-self.inp[i][j])
-		#		delta[i][j] *= (1.0 / (1.0 + ne)) * (1.0 - (1.0 / (1.0 + ne)))
-		return delta*((1/(1+np.exp(-self.input)))*(1-1/(1+np.exp(-self.input))))
 		############################################################################
 	    # TODO: Put your code here
 		# Calculate the gradient using the later layer's gradient: delta
 
-
+		return delta*((1/(1+np.exp(-self.input)))*(1-1/(1+np.exp(-self.input))))
 	    ############################################################################

@@ -19,10 +19,6 @@ class ReLULayer():
 
 
 	def backward(self, delta):
-		#for i in range(len(delta)):
-			#for j in range(len(delta[i])):
-				#delta[i][j] *= (self.inp[i][j] >= 0)
-				
 		return delta*(self.input>=0)
 		############################################################################
 	    # TODO: Put your code here
