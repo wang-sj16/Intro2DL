@@ -41,7 +41,10 @@ class SoftmaxCrossEntropyLossLayer():
 		#	
 		#self.loss = -self.loss / (batch_size * 10)
 		#self.acc = self.acc / (batch_size)
-		self.loss=np.sum(np.log(logit+EPS)*gt)/(-batch_size * 10)
+		logit=np.exp(logit)
+		for i in range(logit.shape[0]):
+				logit[i]=logit[i]/np.sum(logit[i])
+		self.loss=np.sum(np.log(logit)*gt)/(-batch_size * 10)
 		self.acc=np.sum(np.argmax(logit,axis=1)-np.argmax(gt,axis=1)==0)/batch_size
 		return self.loss
         ############################################################################
