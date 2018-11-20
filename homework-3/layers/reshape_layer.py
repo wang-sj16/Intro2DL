@@ -14,6 +14,11 @@ class ReshapeLayer():
 
 	def forward(self, Input):
 		# TODO: put your code here
-
+		return Input.reshape(self.output_shape)
+		
 	def backward(self, delta):
 		# TODO: put your code here
+		#print(delta.shape)
+		return delta.reshape(self.input_shape)
+		
+            

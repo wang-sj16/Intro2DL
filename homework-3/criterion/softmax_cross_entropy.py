@@ -20,10 +20,20 @@ class SoftmaxCrossEntropyLossLayer():
 		############################################################################
 	    # TODO: Put your code here
 		# Calculate the average accuracy and loss over the minibatch, and
-		# store in self.acc and self.loss respectively.
-		# Only return the self.loss, self.acc will be used in solver.py.
+		# store in self.accu and self.loss respectively.
+		# Only return the self.loss, self.accu will be used in solver.py.
 
+		self.gt = gt
+		self.prob = np.exp(logit) / (EPS + np.exp(logit).sum(axis=1, keepdims=True))
 
+		# calculate the accuracy
+		predict_y = np.argmax(self.prob, axis=1) # self.prob, not logit.
+		gt_y = np.argmax(gt, axis=1)
+		self.acc = np.mean(predict_y == gt_y)
+
+		# calculate the loss
+		loss = np.sum(-gt * np.log(self.prob + EPS), axis=1)
+		self.loss = np.mean(loss)
 	    ############################################################################
 
 		return self.loss
@@ -35,5 +45,5 @@ class SoftmaxCrossEntropyLossLayer():
 	    # TODO: Put your code here
 		# Calculate and return the gradient (have the same shape as logit)
 
-
+		return self.prob - self.gt
 	    ############################################################################

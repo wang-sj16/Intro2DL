@@ -20,6 +20,9 @@ class FCLayer():
 
 		self.XavierInit()
 
+		self.diff_W = np.zeros((num_input, num_output))
+		self.diff_b = np.zeros((1, num_output))
+
 
 	def forward(self, Input):
 
@@ -27,7 +30,9 @@ class FCLayer():
 	    # TODO: Put your code here
 		# Apply linear transformation(Wx+b) to Input, and return results.
 
-
+		self.input = Input
+		output = np.dot(self.input, self.W) + self.b
+		return output
 	    ############################################################################
 
 
@@ -37,7 +42,13 @@ class FCLayer():
 	    # TODO: Put your code here
 		# Calculate the gradient using the later layer's gradient: delta
 
+		# self.grad_W and self.grad_b will be used in optimizer.py
 
+		N = delta.shape[0]
+		self.grad_W = np.dot(self.input.T, delta) / N
+		self.grad_b = np.sum(delta, axis=0, keepdims=True) / N
+
+		return np.dot(delta, self.W.T)
 	    ############################################################################
 
 
